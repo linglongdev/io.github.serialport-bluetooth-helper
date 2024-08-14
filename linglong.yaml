@@ -1,0 +1,29 @@
+version: "1"
+
+package:
+  id: io.github.serialport-bluetooth-helper
+  name: serialport-bluetooth-helper
+  version: 1.7.0.1
+  kind: app
+  description: |
+    serialport and bluetooth use qt5
+
+command:
+  - /opt/apps/io.github.serialport-bluetooth-helper/files/bin/SBhelper
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/IronSublimate/serialport-bluetooth-helper.git
+    version: master
+    commit: a49a6034e51ffb89c03fe9cf79ed8e79e09d64f8
+
+build: |
+  cd /project/linglong/sources/serialport-bluetooth-helper.git
+  git apply ../../../0001-install.patch
+  cp res/icon.png res/SBhelper.png
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
