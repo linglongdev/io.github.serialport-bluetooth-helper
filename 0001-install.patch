@@ -1,0 +1,55 @@
+From 5b3a847c1344dd6def60787af2254af4ffc56a2d Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 13 Aug 2024 13:45:28 +0800
+Subject: [PATCH] install
+
+---
+ SBhelper.desktop | 11 +++++++++++
+ SBhelper.pro     | 10 +++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 SBhelper.desktop
+
+diff --git a/SBhelper.desktop b/SBhelper.desktop
+new file mode 100644
+index 0000000..46c7b69
+--- /dev/null
++++ b/SBhelper.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Qt;Utility;
++Exec=SBhelper
++Name=SBhelper
++Name[zh_CN]=SBhelper
++Icon=SBhelper
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=SBhelper
++Version=1.7
+\ No newline at end of file
+diff --git a/SBhelper.pro b/SBhelper.pro
+index 9d9bf53..421553b 100644
+--- a/SBhelper.pro
++++ b/SBhelper.pro
+@@ -78,9 +78,17 @@ TRANSLATIONS += \
+ 
+ # Default rules for deployment.
+ qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
++else: unix:!android: #target.path = /opt/$${TARGET}/bin
+ !isEmpty(target.path): INSTALLS += target
+ 
++target.path = $$PREFIX/bin
++desktop.files = SBhelper.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons
++icons.files = res/SBhelper.png
++
++INSTALLS += target desktop icons
++
+ RESOURCES += \
+     res/res.qrc \
+ 
+-- 
+2.43.4
+
